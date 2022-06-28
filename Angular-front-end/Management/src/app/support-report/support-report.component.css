@@ -1,0 +1,12 @@
+.date-filter{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.button
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;  
+}

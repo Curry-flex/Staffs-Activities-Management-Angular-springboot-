@@ -1,0 +1,39 @@
+<div class="card-body">
+  
+    <h5>Completed</h5>
+    <input type="text" class="form-control" name="support_from" [(ngModel)]="task" (ngModelChange)="search()"
+    placeholder="Enter task to search"
+    >
+ 
+   <div class="table-responsive">
+    <table id="example1" class="table table-bordered table-striped ">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Task</th>
+        <th>Assigned to</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>Description</th>
+        <th>Status</th>
+       
+    
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let schedule of schedule | paginate:{itemsPerPage:10,currentPage:p}; let i=index">
+        <td style="width:10% ;">{{ i +1}}</td>
+        <td>{{schedule.task}}</td>
+        <td>{{schedule.assigned_to}}</td>
+        <td >{{schedule.start_date}}</td>
+        <td>{{schedule.end_date}}</td>
+        <td>{{schedule.description.toString() | slice:0:80}}</td>
+        <td   ><span  [ngStyle]="{'background-color': schedule.status == 1? 'green': 'red'}">{{schedule.status == 0? 'Progress': 'completed'}}</span></td>
+        
+      </tr>
+   
+      </tbody>
+    </table>
+   </div>
+ <pagination-controls (pageChange)="p = $event" style="margin-top: 10px;"></pagination-controls>
+</div>

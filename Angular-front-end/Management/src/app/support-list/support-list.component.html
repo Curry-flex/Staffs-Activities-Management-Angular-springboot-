@@ -1,0 +1,44 @@
+<div class="card-body">
+  
+      <h5>Support List</h5>
+     <input type="text" class="form-control" name="support_from" [(ngModel)]="support_from" (ngModelChange)="Search()"
+     placeholder="Enter bank to search"
+     >
+  
+  <div class="table-responsive">
+    <table id="example1" class="table table-bordered table-striped ">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Support Title</th>
+        <th>From</th>
+        <th>Description</th>
+        <th>Created at</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let support of supportList | paginate:{itemsPerPage:10,currentPage:p}; let i=index">
+        <td style="width:10% ;">{{ i +1}}</td>
+        <td>{{support.support_title}}</td>
+        <td>{{support.support_from}}</td>
+        <td >{{support.description.toString() | slice:0:80}}</td>
+        <td>{{support.created_at}}</td>
+        <td   ><span  [ngStyle]="{'background-color': support.status == 1? 'green': 'red'}">{{support.status == 1? 'Solved': 'Not Solved'}}</span></td>
+        <td class=" py-0 align-middle" >
+          <div class="btn-group btn-group-sm text-center" style="align-items: center; justify-content: center;">
+            <button class="btn btn-info" (click)="supportDetails(support.id)"><i class="fas fa-eye"></i></button>
+            <button  class="btn btn-success" (click)="updateSupport(support.id)"><i class="fas fa-pen"></i></button>
+            <button  class="btn btn-danger" (click)="deleteSupport(support.id)"><i class="fas fa-trash"></i></button>
+         
+          </div>
+        
+        </td>
+      </tr>
+  
+      </tbody>
+    </table>
+  </div>
+  <pagination-controls (pageChange)="p = $event" style="margin-top: 10px;"></pagination-controls>
+</div>

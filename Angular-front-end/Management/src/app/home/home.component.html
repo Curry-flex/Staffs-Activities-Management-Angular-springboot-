@@ -1,0 +1,59 @@
+<section class="content" >
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-8 col-offset-3 form">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Support</h3>
+            </div>
+          
+            <form [formGroup]="supportEntry" (ngSubmit)="onSubmit()">
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Support Title</label>
+                  <input type="text" class="form-control" [formControlName]="'support_title'" pattern="[a-zA-Z]*" id="title" name="title" placeholder="Enter title" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                  <label for="exampleInputEmail1">From</label>
+                   <select name="" id="" [formControlName]="'support_from'" class="form-control">
+                    <option [ngValue]="null" disabled>Select bank</option>
+                     <option *ngFor="let support of support_from" [value]="support.name">{{support.name}}</option>
+                   </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Description</label>
+                  <textarea class="form-control" name="description" [formControlName]="'description'" id="description" cols="30" rows="3" autocomplete="off"></textarea>
+                </div>
+               
+                <div class="form-check">
+                  <input type="checkbox" value="1" (change)="onCheckChange($event)" class="form-check-input" id="exampleCheck1">
+                  <label class="form-check-label"   for="exampleCheck1">Solved ?</label>
+                </div>
+                </div>
+              <!-- /.card-body -->
+
+              <div class="card-footer">
+                <button [disabled]="!supportEntry.valid" type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+
+    
+
+
+          <!-- /.card -->
+
+        </div>
+        <!--/.col (left) -->
+        <!-- right column -->
+ 
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>

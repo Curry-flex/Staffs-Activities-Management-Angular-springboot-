@@ -1,0 +1,139 @@
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h5>Support Report</h5>
+          </div>
+          <div class="col-sm-6">
+            <form [formGroup]="reportData" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">From</label>
+                            <input type="date" class="form-control" [formControlName]="'start_date'" id="company"  placeholder="Enter company">
+                          </div>
+                    </div>
+    
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">To</label>
+                            <input type="date" class="form-control" id="company" [formControlName]="'end_date'"  ngModel name="end_date"  placeholder="Enter company">
+                         </div>
+    
+                         
+                    </div>
+                    
+                      <div class="col-md-3" style="margin-top: 30px;">
+                        
+                        <div class="">
+                            <button type="submit" [disabled]="!reportData.valid" class="btn btn-success">fetch</button>
+                          </div>
+                      </div>
+                    
+                </div>
+            </form>
+
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <section class="content" id="print-section">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+        
+            <!-- Main content -->
+            <div class="invoice p-3 mb-3">
+              
+              <!-- info row -->
+              <div class="row invoice-info">
+                <div class="col-sm-4 invoice-col">
+                  <strong>PBZ</strong><br><br>
+                  <address>
+                    <strong>Total Support: {{pbz_count}}</strong><br>
+                    <strong>Today Support: {{pbz_today}}</strong><br>
+                    <strong>Solved Support: {{PbzsolvedSupport}}</strong><br>
+                    <strong>Not solved Support: {{PbznotSolvedSupport}}</strong><br>
+             
+                  </address>
+                </div>
+
+                    <!-- /.col -->
+                    <div class="col-sm-4 invoice-col">
+                        <strong>AZANIA</strong><br><br>
+                        <address>
+                          <strong>Total Support: {{azania_count}}</strong><br>
+                          <strong>Today Support: {{azania_today}}</strong><br>
+                          <strong>Solved Support: {{AzaniasolvedSupport}}</strong><br>
+                          <strong>Not solved Support: {{AzanianotSolvedSupport}}</strong><br>
+                   
+                        </address>
+                    </div>
+                    <!-- /.col -->
+                <!-- /.col -->
+                <div class="col-sm-4 invoice-col">
+                    <strong>DCB</strong><br><br>
+                    <address>
+                      <strong>Total Support: {{dcb_count}}</strong><br>
+                      <strong>Today Support: {{dcb_today}}</strong><br>
+                      <strong>Solved Support: {{DcbsolvedSupport}}</strong><br>
+                      <strong>Not solved Support: {{DcbnotSolvedSupport}}</strong><br>
+               
+                    </address>
+                </div>
+            
+              </div>
+              <!-- /.row -->
+
+              <!-- Table row -->
+              <div class="row">
+                <div class="col-12 table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Support Title</th>
+                      <th>From</th>
+                      <th>Description</th>
+                      <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let report of  responseData ; let i =index">
+                      <td>{{i+1}}</td>
+                      <td id="title">{{report.support_title}}</td>
+                      <td>{{report.support_from}}</td>
+                      <td>{{report.description | slice:0:80}}</td>
+                      <td   ><span  [ngStyle]="{'background-color': report.status == 1? 'green': 'red'}">{{report.status == 1? 'Solved': 'Not Solved'}}</span></td>
+                    </tr>
+
+   
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+
+
+              <!-- this row will not appear when printing -->
+              <div class="row no-print">
+                <div class="col-12">
+                  <button (click)="print()" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</button>
+                
+                  <!-- <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                    <i class="fas fa-download"></i> Generate PDF
+                  </button> -->
+                </div>
+              </div>
+            </div>
+            <!-- /.invoice -->
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  

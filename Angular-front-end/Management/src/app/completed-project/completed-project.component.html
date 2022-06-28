@@ -1,0 +1,38 @@
+<div class="card-body">
+  
+    <h5>Completed Projects</h5>
+    <input type="text" class="form-control" name="support_from" [(ngModel)]="project_title" (ngModelChange)="search()"
+    placeholder="Enter project title to search"
+    >
+ 
+   <div class="table-responsive">
+    <table id="example1" class="table table-bordered table-striped ">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Project title</th>
+        <th>Assigned to</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>Description</th>
+        <th>Status</th>
+       
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let project of progressProject | paginate:{itemsPerPage:10,currentPage:p}; let i=index">
+        <td style="width:10% ;">{{ i +1}}</td>
+        <td>{{project.project_title}}</td>
+        <td>{{project.assigned_to}}</td>
+        <td >{{project.start_date }}</td>
+        <td>{{project.end_date}}</td>
+        <td>{{project.description.toString() | slice:0:80}}</td>
+        <td   ><span  [ngStyle]="{'background-color': project.status == 1? 'green': 'red'}">{{project.status == 0? 'Progress': 'completed'}}</span></td>
+      
+      </tr>
+   
+      </tbody>
+    </table>
+   </div>
+ <pagination-controls (pageChange)="p = $event" style="margin-top: 10px;"></pagination-controls>
+</div>
